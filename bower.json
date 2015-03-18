@@ -1,0 +1,34 @@
+{
+  "name": "0.8-contacts-vignette",
+  "version": "0.0.1",
+  "authors": [
+    "Yvonne Yip <ykyyip@google.com>"
+  ],
+  "keywords": [
+    "polymer"
+  ],
+  "main": "index.html",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerLabs/0.8-contacts-vignette"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/PolymerLabs/0.8-contacts-vignette/",
+  "ignore": [
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.8-preview",
+    "webcomponentsjs": "Polymer/webcomponentsjs#master",
+    "core-drawer-panel": "Polymer/core-drawer-panel#0.8-preview",
+    "core-header-panel": "Polymer/core-header-panel#0.8-preview",
+    "core-toolbar": "Polymer/core-toolbar#0.8-preview",
+    "layout": "Polymer/layout#0.8-preview",
+    "paper-card": "Polymer/paper-card#0.8-preview",
+    "paper-style": "PolymerLabs/paper-styles/paper-styles#master"
+  },
+  "devDependencies": {
+    "test-fixture": "*",
+    "web-component-tester": "*"
+  }
+}
