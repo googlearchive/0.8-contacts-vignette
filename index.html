@@ -28,9 +28,12 @@
   <link rel="import" href="elements/contacts-list.html">
 
   <link rel="stylesheet" href="shared.css">
-  <link rel="stylesheet" href="theme.css">
+
+  <link rel="import" href="css/theme-blue-pink.html">
+  <!-- <link rel="import" href="css/theme-teal-amber.html"> -->
 
   <style>
+
     core-header-panel {
       height: 100%;
     }
@@ -46,23 +49,34 @@
 
   </style>
 
-  <style is="style-properties">
+<!--
+  <style is="x-style">
 
-    * {
+    body {
+      mixin(--primary-background-color);
+      mixin(--primary-text-color);
+    }
 
-        --contacts-list-toolbar: {
-          background: #3f51b5;
-          color: #ffffff;
-        }
+    core-toolbar {
+      mixin(--dark-primary-color);
+      mixin(--text-primary-color);
+    }
 
-      }
+    .card {
+      mixin(--primary-background-color);
+    }
+
+    .fab {
+      mixin(--accent-color);
+    }
 
   </style>
+-->
 
 </head>
-<body class="fullbleed layout vertical primary-background-color primary-text-color">
+<body class="fullbleed layout vertical theme-blue-pink">
 
-  <core-toolbar class="dark-primary-color text-primary-color"></core-toolbar>
+  <core-toolbar></core-toolbar>
 
   <core-drawer-panel class="relative flex" drawer-width="40%">
 
@@ -70,12 +84,12 @@
 
     <core-header-panel main mode="cover">
 
-      <core-toolbar class="dark-primary-color text-primary-color">
+      <core-toolbar>
         <span class="flex"></span>
-        <div class="fab accent-color below-toolbar outside-fab"></div>
+        <div class="fab below-toolbar outside-fab"></div>
       </core-toolbar>
 
-      <paper-card class="primary-background-color card paper-font-body1 layout vertical">
+      <paper-card class="card paper-font-body1 layout vertical">
 
         <contacts-detail></contacts-detail>
 

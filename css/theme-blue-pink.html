@@ -9,44 +9,47 @@
 -->
 
 <link rel="import" href="../components/polymer/polymer.html">
-<link rel="import" href="../components/core-toolbar/core-toolbar.html">
 
-<dom-module id="contacts-list">
+<style is="x-style">
 
-  <style>
+  .theme-blue-pink /deep/ * {
 
-    core-toolbar {
-      mixin(--dark-primary-color)
-      mixin(--text-primary-color)
+    --dark-primary-color: {
+      background: #303f9f;
     }
 
-  </style>
+    --default-primary-color: {
+      background: #3f51b5;
+    }
 
-  <template>
+    --light-primary-color: {
+      background: #c5cae9;
+    }
 
-    <core-toolbar class="paper-font-title">
-      All
-    </core-toolbar>
+    --text-primary-color: {
+      color: #ffffff;
+    }
 
-    <div class="flex">
-    </div>
+    --accent-color: {
+      background: #ff4081;
+    }
 
-  </template>
+    --primary-background-color: {
+      background: #ffffff;
+    }
 
-</dom-module>
+    --primary-text-color: {
+      color: #212121;
+    }
 
-<script>
+    --secondary-text-color: {
+      color: #727272;
+    }
 
-(function() {
+    --divider-color: {
+      border-color: #b6b6b6;
+    }
 
-  Polymer({
+  }
 
-    is: 'contacts-list',
-
-    enableCustomStyleProperties: true
-
-  });
-
-})();
-
-</script>
+</style>
