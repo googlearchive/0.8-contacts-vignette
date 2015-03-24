@@ -26,6 +26,7 @@
 
   <link rel="import" href="elements/contacts-detail.html">
   <link rel="import" href="elements/contacts-list.html">
+  <link rel="import" href="elements/themable-toolbar.html">
 
   <link rel="stylesheet" href="shared.css">
 
@@ -49,34 +50,10 @@
 
   </style>
 
-<!--
-  <style is="x-style">
-
-    body {
-      mixin(--primary-background-color);
-      mixin(--primary-text-color);
-    }
-
-    core-toolbar {
-      mixin(--dark-primary-color);
-      mixin(--text-primary-color);
-    }
-
-    .card {
-      mixin(--primary-background-color);
-    }
-
-    .fab {
-      mixin(--accent-color);
-    }
-
-  </style>
--->
-
 </head>
-<body class="fullbleed layout vertical theme-blue-pink">
+<body class="fullbleed layout vertical">
 
-  <core-toolbar></core-toolbar>
+  <themable-toolbar></themable-toolbar>
 
   <core-drawer-panel class="relative flex" drawer-width="40%">
 
@@ -84,10 +61,10 @@
 
     <core-header-panel main mode="cover">
 
-      <core-toolbar>
+      <themable-toolbar class="core-header">
         <span class="flex"></span>
         <div class="fab below-toolbar outside-fab"></div>
-      </core-toolbar>
+      </themable-toolbar>
 
       <paper-card class="card paper-font-body1 layout vertical">
 

@@ -9,24 +9,15 @@
 -->
 
 <link rel="import" href="../components/polymer/polymer.html">
-<link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../elements/themable-toolbar.html">
 
 <dom-module id="contacts-list">
 
-  <style>
-
-    core-toolbar {
-      mixin(--dark-primary-color)
-      mixin(--text-primary-color)
-    }
-
-  </style>
-
   <template>
 
-    <core-toolbar class="paper-font-title">
+    <themable-toolbar>
       All
-    </core-toolbar>
+    </themable-toolbar>
 
     <div class="flex">
     </div>
