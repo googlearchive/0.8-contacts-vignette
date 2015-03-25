@@ -9,18 +9,63 @@
 -->
 
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../components/core-image/core-image.html">
+<link rel="import" href="../components/paper-styles/paper-styles.html">
+<link rel="import" href="../elements/contacts-data.html">
 <link rel="import" href="../elements/themable-toolbar.html">
 
 <dom-module id="contacts-list">
 
+  <style>
+
+    core-toolbar {
+      mixin(--dark-primary-color)
+      mixin(--text-primary-color)
+    }
+
+    .avatar {
+      border-radius: 50%;
+      margin: 8px 16px;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .preload {
+      background: lightgrey;
+    }
+
+    .item-body {
+      margin-right: 16px;
+    }
+
+  </style>
+
   <template>
 
-    <themable-toolbar>
-      All
-    </themable-toolbar>
+    <core-header-panel mode="seamed">
 
-    <div class="flex">
-    </div>
+      <themable-toolbar class="core-header">
+        All
+      </themable-toolbar>
+
+      <div class="flex scroll" on-click="onClick">
+
+        <template is="x-repeat" id="list" items="[[contacts]]">
+
+          <div class="layout horizontal center paper-font-subhead">
+            <core-image class="avatar preload" preload sizing="contain" src="[[item.avatar]]"></core-image>
+            <div class="item-body flex">
+              <span>[[item.name]]</span>
+            </div>
+          </div>
+
+        </template>
+
+      </div>
+
+    </core-header-panel>
 
   </template>
 
@@ -34,7 +79,24 @@
 
     is: 'contacts-list',
 
-    enableCustomStyleProperties: true
+    enableCustomStyleProperties: true,
+
+    properties: {
+
+      contacts: {
+        type: Array
+      },
+
+      selected: {
+        notify: true,
+        type: Number
+      }
+
+    },
+
+    onClick: function(event) {
+      this.selected = this.$.list.indexForElement(event.target);
+    }
 
   });
 

@@ -1,0 +1,96 @@
+<!--
+    @license
+    Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-icon/core-icon.html">
+<link rel="import" href="../components/core-icons/communication-icons.html">
+<link rel="import" href="../components/paper-styles/paper-styles.html">
+
+<dom-module id="contact-detail-group">
+
+  <style>
+
+    core-icon {
+      margin: 24px 16px 24px;
+    }
+
+    .item-body {
+      margin: 14px 16px;
+    }
+
+    .secondary-text {
+      opacity: 0.54;
+    }
+
+  </style>
+
+  <template>
+
+    <div class="layout horizontal">
+
+      <core-icon icon="[[computeIconFromType(type)]]"></core-icon>
+
+      <div class="flex">
+
+        <template is="x-repeat" items="{{data}}">
+
+          <div class="flex layout horizontal center paper-font-subhead">
+            <div class="item-body flex">
+              <div><span>[[item.value]]</span></div>
+              <div class="paper-font-body1 secondary-text"><span>[[item.type]]</span></div>
+            </div>
+          </div>
+
+        </template>
+
+      </div>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+(function() {
+
+  Polymer({
+
+    is: 'contact-detail-group',
+
+    properties: {
+
+      type: {
+        type: String,
+        value: ''
+      },
+
+      data: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      }
+
+    },
+
+    computeIconFromType: function() {
+      var map = {
+        'address': 'communication:location-on',
+        'email': 'communication:email',
+        'phone': 'communication:phone'
+      };
+      return map[this.type];
+    }
+
+  })
+
+})();
+
+</script>

@@ -8,16 +8,6 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-.fab {
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-}
-
-.outside-fab {
-  margin-right: 20px;
-}
-
 .below-toolbar {
   position: relative;
   top: 50%;

@@ -19,6 +19,8 @@
 
   <link rel="import" href="components/core-drawer-panel/core-drawer-panel.html">
   <link rel="import" href="components/core-header-panel/core-header-panel.html">
+  <link rel="import" href="components/core-icon/core-icon.html">
+  <link rel="import" href="components/core-icons/core-icons.html">
   <link rel="import" href="components/core-toolbar/core-toolbar.html">
   <link rel="import" href="components/layout/layout.html">
   <link rel="import" href="components/paper-card/paper-card.html">
@@ -26,6 +28,7 @@
 
   <link rel="import" href="elements/contacts-detail.html">
   <link rel="import" href="elements/contacts-list.html">
+  <link rel="import" href="elements/themable-fab.html">
   <link rel="import" href="elements/themable-toolbar.html">
 
   <link rel="stylesheet" href="shared.css">
@@ -40,12 +43,20 @@
     }
 
     .card {
-      height: 150%; /* temporary */
       margin: 0 128px 0 8px;
+      background: white;
     }
 
     [narrow] .card {
       margin: 0;
+    }
+
+    contacts-list {
+      height: 100%;
+    }
+
+    themable-fab {
+      margin-right: 20px;
     }
 
   </style>
@@ -53,37 +64,48 @@
 </head>
 <body class="fullbleed layout vertical">
 
-  <themable-toolbar></themable-toolbar>
+  <template is="x-autobind">
 
-  <core-drawer-panel class="relative flex" drawer-width="40%">
+    <themable-toolbar hidden$="[[narrow]]">
+      <core-icon icon="menu"></core-icon>
+    </themable-toolbar>
 
-    <contacts-list drawer class="layout vertical"></contacts-list>
+    <core-drawer-panel id="drawerPanel" class="relative flex" drawer-width="40%" on-core-responsive-change="onResponsiveChange">
 
-    <core-header-panel main mode="cover">
+      <contacts-list drawer class="layout vertical" contacts="{{contacts}}" selected="{{selected}}"></contacts-list>
 
-      <themable-toolbar class="core-header">
-        <span class="flex"></span>
-        <div class="fab below-toolbar outside-fab"></div>
-      </themable-toolbar>
+      <core-header-panel main mode="cover">
 
-      <paper-card class="card paper-font-body1 layout vertical">
+        <themable-toolbar class="core-header">
+          <span class="bottom flex"></span>
+          <themable-fab class="bottom below-toolbar outside-fab"></themable-fab>
+        </themable-toolbar>
 
-        <contacts-detail></contacts-detail>
+        <paper-card class="card paper-font-body1 layout vertical">
 
-      </paper-card>
+          <contacts-detail id="detail" contact="{{selectedContact}}"></contacts-detail>
 
-    </core-header-panel>
+        </paper-card>
 
-  </core-drawer-panel>
+      </core-header-panel>
+
+    </core-drawer-panel>
+
+    <contacts-data contacts="{{contacts}}" selected="{{selected}}" selected-contact="{{selectedContact}}"></contacts-data>
+
+  </template>
 
   <script>
 
-    var drawerPanel = document.querySelector('core-drawer-panel');
-    var contactsDetail = document.querySelector('contacts-detail');
+    var scope = document.querySelector('template[is=x-autobind]');
 
-    drawerPanel.addEventListener('core-responsive-change', function(event) {
-      contactsDetail.fire('core-responsive-changed', event.detail);
-    });
+    scope.onResponsiveChange = function(event) {
+      this.$.detail.fire('core-responsive-changed', event.detail);
+      this.narrow = event.detail.narrow;
+    };
+
+    scope.narrow = scope.$.drawerPanel.narrow;
+    scope.$.detail.fire('core-responsive-changed', {narrow: scope.narrow});
 
   </script>
 

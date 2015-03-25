@@ -9,7 +9,10 @@
 -->
 
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-image/core-image.html">
 <link rel="import" href="../components/core-toolbar/core-toolbar.html">
+<link rel="import" href="contact-detail-group.html">
+<link rel="import" href="themable-fab.html">
 
 <dom-module id="contacts-detail">
 
@@ -17,15 +20,27 @@
 
   <style>
 
-    :host(:not([narrow])) .inside-fab {
+    core-toolbar {
+      background: transparent;
+      color: white;
+    }
+
+    :host(:not([narrow])) themable-fab {
       display: none;
     }
 
-    .fab {
-      --mixin(--accent-color);
+    .contact-name {
+      margin-left: 56px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
-    .inside-fab {
+    :host([narrow]) .contact-name {
+      margin-left: 16px;
+    }
+
+    themable-fab {
       margin-right: 16px;
     }
 
@@ -33,12 +48,19 @@
 
   <template>
 
-    <core-toolbar class="tall">
-      <span class="bottom flex"></span>
-      <div class="bottom fab below-toolbar inside-fab"></div>
-    </core-toolbar>
+    <div class="relative">
+      <core-image class="fit" preload fade sizing="cover" src="[[computeBackgroundImage(contact.background)]]"></core-image>
+      <core-toolbar class="tall">
+        <span class="contact-name bottom flex paper-font-display1">[[contact.name]]</span>
+        <themable-fab class="bottom below-toolbar"></themable-fab>
+      </core-toolbar>
+    </div>
 
-    <div class="flex"></div>
+    <div class="flex">
+      <template is="x-repeat" items="[[contact.info]]">
+        <contact-detail-group type="[[item.type]]" data="[[item.items]]"></contact-detail-group>
+      </template>
+    </div>
 
   </template>
 
@@ -52,8 +74,24 @@
 
     is: 'contacts-detail',
 
+    properties: {
+
+      contact: {
+        type: Object
+      }
+
+    },
+
     listeners: {
       'core-responsive-changed': 'onResponsiveChanged'
+    },
+
+    computeBackgroundImage: function() {
+      return this.contact ? this.contact.background + '?' + Math.floor(Math.random() * 100000) : '';
+    },
+
+    computeIconFromType: function(item) {
+      return 'communication:phone';
     },
 
     onResponsiveChanged: function(event) {
